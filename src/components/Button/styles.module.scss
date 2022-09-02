@@ -1,0 +1,19 @@
+.button {
+    font-family: inherit;
+    height: 34px;
+    width: 100px;
+    border: none;
+    border-radius: 80px;
+    background-color: #f4e041;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        background-color: #ffe302;
+    }
+    &:disabled {
+        background-color: #b4b4b4;
+        color: #ffffff;
+        cursor: initial;
+    }
+}

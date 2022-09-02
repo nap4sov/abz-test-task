@@ -1,0 +1,32 @@
+.card {
+    height: 254px;
+    width: 328px;
+    border-radius: 10px;
+    padding: 20px;
+    background: #ffffff;
+    text-align: center;
+
+    @media screen and (min-width: 768px) {
+        width: 344px;
+    }
+    @media screen and (min-width: 1024px) {
+        width: 282px;
+    }
+    @media screen and (min-width: 1280px) {
+        width: 370px;
+    }
+}
+
+.thumb {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.name {
+    margin-bottom: 20px;
+}

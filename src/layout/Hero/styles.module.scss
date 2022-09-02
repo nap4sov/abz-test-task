@@ -1,0 +1,31 @@
+.container {
+    text-align: center;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 40px;
+    padding-bottom: 71px;
+    color: #ffffff;
+
+    @media screen and (min-width: 768px) {
+        padding-top: 89px;
+        padding-bottom: 88px;
+    }
+    @media screen and (min-width: 1024px) {
+        padding-top: 164px;
+        padding-bottom: 163px;
+    }
+}
+
+.text {
+    margin-top: 21px;
+}
+
+.wrapper {
+    margin-bottom: 32px;
+    margin-right: auto;
+    margin-left: auto;
+    @media screen and (min-width: 768px) {
+        width: 380px;
+    }
+}
