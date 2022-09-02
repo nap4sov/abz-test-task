@@ -181,7 +181,7 @@ const SignupForm = ({ setSuccessfulSubmit }) => {
                 {fileName || 'Upload your photo'}
             </div>
             <Button
-                disabled={formik.isSubmitting}
+                disabled={!(formik.isValid && formik.dirty)}
                 className={styles.button}
                 type="submit"
                 label="Sign up"
