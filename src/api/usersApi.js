@@ -20,8 +20,5 @@ export const signUpUser = async formData => {
         headers: { Token: data.token },
     };
 
-    axios
-        .post('/users', formData, config)
-        .then(console.log)
-        .catch(console.error);
+    axios.post('/users', formData, config).catch(console.error);
 };
