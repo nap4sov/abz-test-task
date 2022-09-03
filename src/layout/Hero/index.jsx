@@ -2,9 +2,12 @@ import Button from '../../components/Button';
 import Container from '../Container';
 import styles from './styles.module.scss';
 
-const backgroundPath = `${process.env.PUBLIC_URL}/assets/images/pexels-alexandr-podvalny-1227513.jpeg`;
+const backgroundFull = `${process.env.PUBLIC_URL}/assets/images/pexels-alexandr-podvalny-1227513.jpeg`;
+const backgroundCompressed = `${process.env.PUBLIC_URL}/assets/images/pexels-alexandr-podvalny-1227513-min.jpeg`;
 const background = {
-    backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundPath})`,
+    backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${
+        window.innerWidth >= 1024 ? backgroundFull : backgroundCompressed
+    })`,
 };
 const Hero = () => {
     return (

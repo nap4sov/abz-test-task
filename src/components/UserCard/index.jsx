@@ -24,7 +24,7 @@ const UserCard = ({ email, name, phone, photo, position }) => {
     return (
         <div className={styles.card}>
             <div className={styles.thumb}>
-                <img src={imageUrl} alt={name} />
+                <img src={imageUrl} alt={name} height="70" />
             </div>
             <h3 className={styles.name}>{userName}</h3>
             <p>{userPosition}</p>
