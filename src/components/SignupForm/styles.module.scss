@@ -10,28 +10,7 @@
     }
 }
 
-.textInput {
-    width: 100%;
-    padding: 14px 16px;
-    margin-bottom: 50px;
-    background-color: inherit;
-    border: 1px solid #d0cfcf;
-    border-radius: 4px;
-}
-
-.phoneInput {
-    @extend .textInput;
-    position: relative;
-    margin-bottom: 4px;
-}
-.phoneLabel {
-    margin-bottom: 25px;
-    padding-left: 16px;
-    font-size: 12px;
-    line-height: 1.17;
-    color: #7e7e7e;
-}
-
+// custom radio buttons
 .radioInput {
     appearance: none;
     margin-right: 12px;
@@ -55,19 +34,34 @@
     margin-bottom: 7px;
 }
 
+// custom file input
 input[type='file'] {
     display: none;
 }
 .uploadButton {
     position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
+    top: -1px;
+    left: -1px;
+    height: 104%;
     padding: 14px 15px;
 
     border: 1px solid rgba(0, 0, 0, 0.87);
     border-radius: 4px 0px 0px 4px;
     color: rgba(0, 0, 0, 0.87);
+    cursor: pointer;
+
+    transition: box-shadow 300ms linear;
+
+    &:hover {
+        box-shadow: inset 2px 2px 10px -5px rgba(0, 0, 0, 0.75);
+    }
+}
+.uploadButtonError {
+    @extend .uploadButton;
+    top: -2px;
+    left: -2px;
+    height: 108%;
+    border: 2px solid #cb3d40;
 }
 
 .uploadField {
@@ -82,9 +76,25 @@ input[type='file'] {
     color: #7e7e7e;
 }
 
-.uploadFieldActive {
+.uploadFieldError {
     @extend .uploadField;
+    border: 2px solid #cb3d40;
+}
+
+.uploadText {
+    color: #7e7e7e;
+}
+.uploadTextActive {
     color: rgba(0, 0, 0, 0.87);
+}
+
+.errorMessage {
+    position: absolute;
+    bottom: -20px;
+    left: 16px;
+    font-size: 12px;
+    line-height: 1.17;
+    color: #cb3d40;
 }
 
 .button {

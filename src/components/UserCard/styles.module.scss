@@ -1,4 +1,5 @@
 .card {
+    position: relative;
     height: 254px;
     width: 328px;
     border-radius: 10px;
@@ -29,4 +30,25 @@
 
 .name {
     margin-bottom: 20px;
+}
+
+.email {
+    text-decoration: none;
+    color: inherit;
+}
+
+.helper {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    right: 0;
+    max-width: 100%;
+    padding: 3px 16px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.87);
+    color: #ffffff;
+    overflow-wrap: break-word;
+}
+.isHidden {
+    display: none;
 }

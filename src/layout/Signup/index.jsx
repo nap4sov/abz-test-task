@@ -3,7 +3,7 @@ import Container from '../Container';
 import SuccessView from '../../components/SuccessView';
 import styles from './styles.module.scss';
 
-const Signup = ({ successfulSubmit, setSuccessfulSubmit }) => {
+const Signup = ({ successfulSubmit, setSuccessfulSubmit, setIsLoading }) => {
     return (
         <section className={styles.section}>
             {successfulSubmit ? (
@@ -11,7 +11,10 @@ const Signup = ({ successfulSubmit, setSuccessfulSubmit }) => {
             ) : (
                 <Container>
                     <h2 className="heading">Working with POST request</h2>
-                    <SignupForm setSuccessfulSubmit={setSuccessfulSubmit} />
+                    <SignupForm
+                        setSuccessfulSubmit={setSuccessfulSubmit}
+                        setIsLoading={setIsLoading}
+                    />
                 </Container>
             )}
         </section>

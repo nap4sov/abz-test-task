@@ -3,16 +3,10 @@ import { useFormik } from 'formik';
 import { TextField } from '@mui/material';
 import * as yup from 'yup';
 import { signUpUser } from '../../api/usersApi';
+import { computeName, rebuildData } from '../../utils/utils';
 import styles from './styles.module.scss';
 
-const SignupForm = ({ setSuccessfulSubmit }) => {
-    const rebuildData = values => {
-        let formData = new FormData();
-        Object.keys(values).forEach(key => {
-            formData.append(key, values[key]);
-        });
-        return formData;
-    };
+const SignupForm = ({ setSuccessfulSubmit, setIsLoading }) => {
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -44,33 +38,28 @@ const SignupForm = ({ setSuccessfulSubmit }) => {
                     /^[+]{0,1}380([0-9]{9})$/,
                     'Number should start with code of Ukraine +380',
                 )
-                .min(13)
-                .max(13),
+                .min(13, 'Number should consist of + and 12 digits')
+                .max(13, 'Number should consist of + and 12 digits'),
             photo: yup.mixed().required('Image is required'),
         }),
         onSubmit: async (values, { setSubmitting }) => {
+            setIsLoading(true);
             const data = rebuildData(values);
 
             try {
                 await signUpUser(data);
-                setSuccessfulSubmit(true);
             } catch (error) {
                 console.error(error);
             }
-
+            setSuccessfulSubmit(true);
+            setIsLoading(false);
             setSubmitting(false);
         },
     });
 
-    const makeFileName = () => {
-        if (!formik.values.photo) {
-            return null;
-        }
-        return formik.values.photo?.name.length < 22
-            ? formik.values.photo.name
-            : `${formik.values.photo.name.slice(0, 20)}...`;
-    };
-    const fileName = makeFileName();
+    const fileName = !formik.values.photo
+        ? null
+        : computeName(formik.values.photo?.name, 24);
 
     return (
         <form className={styles.form} onSubmit={formik.handleSubmit}>
@@ -83,6 +72,7 @@ const SignupForm = ({ setSuccessfulSubmit }) => {
                 value={formik.values.name}
                 error={formik.touched.name && Boolean(formik.errors.name)}
                 helperText={formik.touched.name && formik.errors.name}
+                color="primary"
                 sx={{ marginBottom: '50px' }}
             />
             <TextField
@@ -112,7 +102,10 @@ const SignupForm = ({ setSuccessfulSubmit }) => {
                 }
                 sx={{ marginBottom: '25px' }}
             />
+
             <p>Select your position</p>
+
+            {/* custom radio buttons */}
 
             <label className={styles.radioLabel}>
                 <input
@@ -159,12 +152,21 @@ const SignupForm = ({ setSuccessfulSubmit }) => {
                 QA
             </label>
 
+            {/* custom file input */}
             <div
                 className={
-                    fileName ? styles.uploadFieldActive : styles.uploadField
+                    formik.errors.photo
+                        ? styles.uploadFieldError
+                        : styles.uploadField
                 }
             >
-                <label className={styles.uploadButton}>
+                <label
+                    className={
+                        formik.errors.photo
+                            ? styles.uploadButtonError
+                            : styles.uploadButton
+                    }
+                >
                     Upload
                     <input
                         name="photo"
@@ -178,8 +180,18 @@ const SignupForm = ({ setSuccessfulSubmit }) => {
                         }}
                     />
                 </label>
-                {fileName || 'Upload your photo'}
+                <span
+                    className={
+                        fileName ? styles.uploadTextActive : styles.uploadText
+                    }
+                >
+                    {fileName || 'Upload your photo'}
+                </span>
+                {formik.errors.photo && (
+                    <p className={styles.errorMessage}>{formik.errors.photo}</p>
+                )}
             </div>
+
             <Button
                 disabled={!(formik.isValid && formik.dirty)}
                 className={styles.button}
